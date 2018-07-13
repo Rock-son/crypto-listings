@@ -44,13 +44,13 @@ const config = {
 			Details: path.join(__dirname, "public/components/Details.jsx"),
 			Toolbar: path.join(__dirname, "public/components/Toolbar.jsx"),
 			Settings: path.join(__dirname, "public/components/Settings.jsx"),
-			Home_MappedState: path.join(__dirname, "public/state/mapProps.js"),
+			MappedState: path.join(__dirname, "public/state/mapProps.js"),
 			// STATE
 			State: path.join(__dirname, "public/state/state.js"),
 			Actions: path.join(__dirname, "public/state/actions.js"),
 			ActionCreators: path.join(__dirname, "public/state/actionCreators.js"),
 			Api: path.join(__dirname, "public/state/api.js"),
-			RootReducer: path.join(__dirname, "public/state/reducers.js")
+			RootReducer: path.join(__dirname, "public/state/reducer.js")
 		},
 		extensions: [".js", ".jsx", ".scss"]
 	},

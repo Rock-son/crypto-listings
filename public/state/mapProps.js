@@ -1,6 +1,8 @@
 "use strict";
 
-import Home from "Home";
+import home from "Home";
+import details from "Details";
+import settings from "Settings";
 import { connect } from "react-redux";
 import {
 	FETCH_DATA, OPEN_SETTINGS_FUNC, CHANGE_SETTINGS_FUNC
@@ -22,7 +24,17 @@ const mapDispatchToProps = function b(dispatch) {
 	};
 };
 
-export default connect(
+export const Home = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Home);
+)(home);
+
+export const Details = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(details);
+
+export const Settings = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(settings);
