@@ -10,6 +10,8 @@ const http = require("http");
 const path = require("path");
 const fs = require("fs");
 const bodyParser = require("body-parser");
+const serveStatic = require('serve-static');
+const favicon = require('serve-favicon');
 // EXPRESS LIMITER
 const RateLimiter = require("express-rate-limit");
 // SECURITY
@@ -35,8 +37,9 @@ const limiter = new RateLimiter({
 app.set("views", path.join(__dirname, "dist"));
 app.set("view engine", "pug");
 // ROUTES
-app.use(express.static(path.join(__dirname, "dist")));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(serveStatic(path.join(__dirname, "dist")));
+app.use(serveStatic(path.join(__dirname, "public")));
+app.use(favicon(path.join(__dirname, 'public/assets/', 'favicon.ico')));
 // BODY PARSERS
 app.use(bodyParser.json({ type: "application/json" }));
 app.use(bodyParser.json({ type: ["json", "application/csp-report"] }));
@@ -57,8 +60,8 @@ app.use(limiter);
 router(app);
 
 // PUT ALL ROUTES ABOVE THIS LINE OF CODE!
-	// * NEEDED FOR REACT ROUTER HISTORY LIB
-	app.get("*", (req, res) => res.sendFile(path.join(__dirname, "dist", "index.html")));
+// * NEEDED FOR REACT ROUTER HISTORY LIB
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "dist", "index.html")));
 
 
 // SERVER
