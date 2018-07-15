@@ -21,13 +21,20 @@ module.exports = {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
             "jsx": true
-        },
+		},
+		'allowImportExportEverywhere': true,
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+		"react"
     ],
     "rules": {
+		// Relax AirBNB import rules
+		'import/extensions': [0],
+		'import/no-absolute-path': [0],
+		'import/no-extraneous-dependencies': [0],
+		'import/no-named-as-default' : [0],
+		'import/no-unresolved': [0],
 		"quote-props": [
 			"error",
 			"consistent"
