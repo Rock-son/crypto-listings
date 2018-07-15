@@ -1,19 +1,18 @@
 {
   "name": "reactjs_test_assignment_povio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ReactJS Test Assignment - Povio",
   "main": "server.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "clean": "rimraf dist",
     "test-w": "nodemon --exec \"npm test\"",
-    "build": "npm run clean && webpack --config webpack.config.js && cross-env NODE_ENV=production node server.js",
-    "builddev": "npm run clean && webpack --config webpack.config.dev.js && cross-env NODE_ENV=development node server.js",
-    "dev": "webpack-dev-server --config webpack.config.dev.js --hot"
+    "build": "npm run clean && cross-env NODE_ENV=production webpack && cross-env NODE_ENV=production node server.js",
+    "builddev": "npm run clean && cross-env NODE_ENV=development webpack && cross-env NODE_ENV=development node server.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot"
   },
   "eslintIgnore": [
     "webpack.config.js",
-    "webpack.config.dev.js",
     "public/assets"
   ],
   "keywords": [
@@ -24,9 +23,9 @@
   "author": "Rok Zigon",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^8.6.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
@@ -46,14 +45,27 @@
     "postcss": "^6.0.23",
     "postcss-loader": "^2.1.6",
     "postcss-scss": "^1.0.6",
+    "react-hot-loader": "^4.3.3",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "resolve-url-loader": "^2.3.0",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^3.12.0",
     "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^2.11.2",
+    "webpack-hot-middleware": "^2.22.2",
+    "why-did-you-update": "^0.1.1"
   },
   "dependencies": {
+    "autoprefixer": "^8.6.5",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
@@ -64,16 +76,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-hot-loader": "^4.3.3",
-    "react-redux": "^5.0.7",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
-    "redux": "^4.0.0",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0",
-    "webpack": "^4.16.0",
-    "webpack-dev-middleware": "^3.1.3",
-    "webpack-hot-middleware": "^2.22.2",
-    "why-did-you-update": "^0.1.1"
+    "serve-favicon": "^2.5.0",
+    "serve-static": "^1.13.2"
   }
 }

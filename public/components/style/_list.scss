@@ -1,0 +1,48 @@
+.list {
+    position: relative;
+    top: 6rem;
+    margin: auto;
+    z-index: 1;
+    transition: opacity .3s;
+    & table {
+        border-collapse: collapse;
+        margin: auto;
+        width: 80%;
+    }
+    & th, & td {
+        border: 1px solid black;
+        padding: 1rem;
+    }
+    td:first-child {
+        width: 2rem;
+        text-align: center;
+        font-weight: 700;
+    }
+    & tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    & tr:hover {
+        background-color: #ddd;
+        cursor: pointer;        
+        color: #333;
+    }
+    & th {
+        padding: 2rem 0 .8rem 1rem;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+    &__spinner {
+        transition: opacity .2s;
+        & .fa-cog {
+            position: absolute;
+            width: 4.3rem;
+            top: 40vh;
+            right: 0;
+            font-size: 5rem;
+            left: 0;
+            margin: auto;
+            color: #67926d;
+        }
+    }
+}
