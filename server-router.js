@@ -36,7 +36,7 @@ module.exports = function a(app) {
 				if (error.request) {
 					// The request was made but no response was received `error.request`
 					// is an instance of http.ClientRequest in node.js
-					return res.status(400).send(error);
+					return res.status(400).send(error.request);
 				}
 				return res.status(400).send(error.message);
 			});
