@@ -18,9 +18,9 @@ const mapStateToProps = function a(state) {
 const mapDispatchToProps = function b(dispatch) {
 	return {
 		openSettings: () => dispatch(OPEN_SETTINGS_FUNC()),
-		changeSettings: () => dispatch(CHANGE_SETTINGS_FUNC()),
-		fetchList: currency => dispatch(FETCH_DATA({ id: null, currency })),
-		fetchDetails: (id, currency) => dispatch(FETCH_DATA({ id, currency }))
+		selectId: id => dispatch(SELECT_ID(id)),
+		prepareUpdate: type => dispatch(PREPARE_FOR_UPDATE(type)),
+		fetchList: (currency, id) => dispatch(FETCH_DATA(currency, id)),
 	};
 };
 

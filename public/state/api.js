@@ -7,7 +7,7 @@ const validateStatus = () => status => status < 500; // Reject if the status is 
 export default {
 	fetchList: currency => axios({
 		method: "post",
-		url: `api/getSymbolList`,
+		url: `api/getCryptocurrencyList`,
 		headers: {
 			"Content-Type": "application/json"
 		},
