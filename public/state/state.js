@@ -10,5 +10,6 @@ export default {
 		currency: "USD",
 		shouldUpdateList: true,
 		shouldUpdateDetails: true,
+		openSettings: false
 	}
 };

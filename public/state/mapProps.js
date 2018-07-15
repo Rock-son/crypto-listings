@@ -1,13 +1,12 @@
 "use strict";
 
-import home from "Home";
-import details from "Details";
-import settings from "Settings";
+import Home from "Home";
+import Details from "Details";
+import Settings from "Settings";
 import { connect } from "react-redux";
 import {
-	FETCH_DATA, OPEN_SETTINGS_FUNC, CHANGE_SETTINGS_FUNC
+	FETCH_DATA, PREPARE_FOR_UPDATE, SELECT_ID, OPEN_SETTINGS_FUNC, CHANGE_SETTINGS_FUNC
 } from "ActionCreators";
-
 
 // Redux connect to props and dispatch actions
 const mapStateToProps = function a(state) {
@@ -18,6 +17,7 @@ const mapStateToProps = function a(state) {
 const mapDispatchToProps = function b(dispatch) {
 	return {
 		openSettings: () => dispatch(OPEN_SETTINGS_FUNC()),
+		changeSettings: currency => dispatch(CHANGE_SETTINGS_FUNC(currency)),
 		selectId: id => dispatch(SELECT_ID(id)),
 		prepareUpdate: type => dispatch(PREPARE_FOR_UPDATE(type)),
 		fetchList: (currency, id) => dispatch(FETCH_DATA(currency, id)),
@@ -25,17 +25,23 @@ const mapDispatchToProps = function b(dispatch) {
 	};
 };
 
-export const Home = connect(
+const home = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(home);
+)(Home);
 
-export const Details = connect(
+const details = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(details);
+)(Details);
 
-export const Settings = connect(
+const settings = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(settings);
+)(Settings);
+
+export default {
+	Home: home,
+	Settings: settings,
+	Details: details
+};
