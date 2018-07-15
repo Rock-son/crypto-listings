@@ -30,18 +30,16 @@ if (process.env.NODE_ENV === "development") {
 		composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware))
 	);
 } else {
-	store = createStore(rootReducer);
+	store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 }
 
-
-// TODO: CHECK IF PRODUCTION - put out loggerMiddleware
 ReactDOM.render(
 	<Provider store={store}>
 		<Router>
 			<Switch>
 				<Route exact path="/" component={Home} />
-				<Route exact path="/details" component={Details} />
-				<Route exact path="/settings" component={Settings} />
+				<Route path="/settings" component={Settings} />
+				<Route path="/details" component={Details} />
 				<Redirect path="*" to="/" />
 			</Switch>
 		</Router>
