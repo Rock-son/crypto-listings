@@ -30,6 +30,18 @@ const listReducer = (state = INITIALIZE_LIST, action) => {
 			shouldUpdateList: false,
 			listData: action.listData
 		};
+	case FETCHING_DETAILS_SUCCESS:
+		return {
+			...state,
+			isFetchingData: false,
+			shouldUpdateDetails: false,
+			detailsData: action.detailsData,
+			selectedId: action.selectedId
+		};
+	case PREPARE_UPDATE:
+		return {
+			...state,
+			[action.dataType]: true
 		};
 	case OPEN_SETTINGS:
 		return {
