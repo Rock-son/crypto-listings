@@ -21,6 +21,7 @@ const mapDispatchToProps = function b(dispatch) {
 		selectId: id => dispatch(SELECT_ID(id)),
 		prepareUpdate: type => dispatch(PREPARE_FOR_UPDATE(type)),
 		fetchList: (currency, id) => dispatch(FETCH_DATA(currency, id)),
+		fetchDetails: (currency, id) => dispatch(FETCH_DATA(currency, id))
 	};
 };
 

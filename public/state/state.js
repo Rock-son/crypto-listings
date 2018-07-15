@@ -5,8 +5,10 @@ export default {
 		isFetchingData: false,
 		error: "",
 		listData: { data: [], metadata: {} },
+		detailsData: { currency: { data: [] }, btc: { data: [] } },
 		selectedId: "",
 		currency: "USD",
-		shouldUpdateList: true
+		shouldUpdateList: true,
+		shouldUpdateDetails: true,
 	}
 };

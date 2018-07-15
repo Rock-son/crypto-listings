@@ -18,7 +18,7 @@ export default {
 	}),
 	fetchDetails: (id, currency) => axios({
 		method: "post",
-		url: `api/getSymbolDetails`,
+		url: `api/getCryptocurrencyDetails`,
 		headers: {
 			"Content-Type": "application/json"
 		},
