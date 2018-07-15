@@ -13,7 +13,6 @@ const TEMPLATE_IN = "./public/template.html";
 const TEMPLATE_OUT = "./index.html";
 // BUNDLE ENTRY & OUTPUT
 const BUNDLE = path.join(__dirname, "public", "index.jsx");
-//const LAZYLOAD = path.join(__dirname, "public", "assets", "scripts", "vendor.js");
 const OUTPUT = path.join(__dirname, "dist");
 // check environment
 var __DEV__ = process.env.NODE_ENV !== 'production';
@@ -25,26 +24,23 @@ const VENDOR_LIBS = ["react", "react-dom", "redux", "react-redux", "react-router
 const config = {
 	entry: {
 		bundle: BUNDLE,
-		//lazyLoad: LAZYLOAD,
 		vendor: VENDOR_LIBS
 	},
 	output: {
 		path: OUTPUT,
-		filename:  __DEV__ ? "[name].js" : "[name]-[hash].js",
-		chunkFilename: __DEV__ ?
-		'[name].js' :
-		'[name]-[chunkhash].js'
+		filename:  __DEV__ ? "[name].js" : "[name]-[hash].js"
 	},
 	resolve: {
 		// using aliases makes components reusable! - with no relative paths, i.e. "require("Home")"
 		alias: {
 			// HOME
-			Home: path.join(__dirname, "public/components/Home.jsx"),
-			List: path.join(__dirname, "public/components/List.jsx"),
-			Details: path.join(__dirname, "public/components/Details.jsx"),
-			Toolbar: path.join(__dirname, "public/components/Toolbar.jsx"),
-			Settings: path.join(__dirname, "public/components/Settings.jsx"),
+			Home: path.join(__dirname, "public/components/home/Home.jsx"),
+			List: path.join(__dirname, "public/components/shared/List.jsx"),
+			Details: path.join(__dirname, "public/components/details/Details.jsx"),
+			Toolbar: path.join(__dirname, "public/components/shared/Toolbar.jsx"),
+			Settings: path.join(__dirname, "public/components/settings/Settings.jsx"),
 			MappedState: path.join(__dirname, "public/state/mapProps.js"),
+			Helpers: path.join(__dirname, "public/components/shared/helpers.js"),
 			// STATE
 			State: path.join(__dirname, "public/state/state.js"),
 			Actions: path.join(__dirname, "public/state/actions.js"),
@@ -59,10 +55,7 @@ const config = {
 		rules: [
 			{
 				test: /\.jsx?$/,
-				use: [
-					__DEV__ && "react-hot-loader",
-					"babel-loader"
-					].filter(Boolean),
+				use: "babel-loader",
 				exclude: /(node_modules)/},
 			{
 				test: /\.scss$/,
@@ -80,20 +73,20 @@ const config = {
 			}
 		]
 	},
-	optimization: {
-		splitChunks: {
-		  	cacheGroups: {
-				commons: {
-				name: 'commons',
-				chunks: 'initial',
-				minChunks: 2
-				}
-		  	}
-		}
-	},
 	plugins: [
 		new ExtractTextPlugin({
 			filename: "[name].[contenthash].css"
+		}),
+		// extract vendor and webpack's module manifest and inline it in the dist HTML
+		new webpack.optimize.CommonsChunkPlugin({
+			names: ["vendor", "manifest"],
+			minChunks: Infinity
+		}),
+		// extract common modules from all the chunks (requires no 'name' property)
+		new webpack.optimize.CommonsChunkPlugin({
+			async: true,
+			children: true,
+			minChunks: 4
 		}),
 		new HtmlWebpackPlugin({
 			template: TEMPLATE_IN,
@@ -109,9 +102,8 @@ const config = {
 }
 
 if (!__DEV__) {
-	module.exports.plugins.push(
+	config.plugins.push(
 		new UglifyJsPlugin({
-			test: /\.js($|\?)/i,
 			cache: true,
 			sourceMap: true,
 			parallel: true,
@@ -120,28 +112,14 @@ if (!__DEV__) {
 				warnings: false,
 				mangle: true
 			}
-		})
-	)
-} else {
-	module.exports.plugins.push(
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoEmitOnErrorsPlugin()
-	  );
+		}));
+	} else {
+		config.plugins.push(new FriendlyErrorsWebpackPlugin());
+		config.devServer = {
+			contentBase: [path.join(__dirname, "dist"), path.join(__dirname, "public")],
+			hot: true,
+			quiet: true
+		};
 }
 
 module.exports = config;
-
-/*
-		// extract vendor and webpack's module manifest and inline it in the dist HTML
-		new webpack.optimize.CommonsChunkPlugin({
-			names: ["vendor", "manifest"],
-			minChunks: Infinity
-		}),
-		// extract common modules from all the chunks (requires no 'name' property)
-		new webpack.optimize.CommonsChunkPlugin({
-			async: true,
-			children: true,
-			minChunks: 4
-		}),
-*/
-
