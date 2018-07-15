@@ -43,6 +43,11 @@ const listReducer = (state = INITIALIZE_LIST, action) => {
 			...state,
 			[action.dataType]: true
 		};
+	case SET_SELECTED_ID:
+		return {
+			...state,
+			selectedId: action.id
+		};
 	case OPEN_SETTINGS:
 		return {
 			...state,
@@ -51,10 +56,15 @@ const listReducer = (state = INITIALIZE_LIST, action) => {
 	case CHANGE_SETTINGS:
 		return {
 			...state,
-			currency: action.currency
+			currency: action.currency,
+			shouldUpdateList: true,
+			shouldUpdateDetails: true
 		};
 	default:
 		return state;
 	}
 }
+export default combineReducers({
+	cryptoData: listReducer
+});
 /* eslint-enable */
