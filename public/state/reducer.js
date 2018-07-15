@@ -1,13 +1,15 @@
 "use strict";
 
+import { combineReducers } from "redux";
+
 import {
-	FETCHING_DATA_START, FETCHING_DATA_FAIL, FETCHING_DATA_SUCCESS,
-	OPEN_SETTINGS, CHANGE_SETTINGS
+	FETCHING_DATA_START, FETCHING_DATA_FAIL, FETCHING_LIST_SUCCESS, PREPARE_UPDATE,
+	FETCHING_DETAILS_SUCCESS, OPEN_SETTINGS, CHANGE_SETTINGS, SET_SELECTED_ID
 } from "Actions";
 import { INITIALIZE_LIST } from "State";
 
 /* eslint-disable import/prefer-default-export */
-export function crypto(state = INITIALIZE_LIST, action) {
+const listReducer = (state = INITIALIZE_LIST, action) => {
 	switch (action.type) {
 	case FETCHING_DATA_START:
 		return {
@@ -21,11 +23,13 @@ export function crypto(state = INITIALIZE_LIST, action) {
 			isFetchingData: false,
 			error: action.error
 		};
-	case FETCHING_DATA_SUCCESS:
+	case FETCHING_LIST_SUCCESS:
 		return {
 			...state,
 			isFetchingData: false,
-			data: action.data
+			shouldUpdateList: false,
+			listData: action.listData
+		};
 		};
 	case OPEN_SETTINGS:
 		return {
