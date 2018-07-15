@@ -4,8 +4,9 @@ export default {
 	INITIALIZE_LIST: {
 		isFetchingData: false,
 		error: "",
-		data: [],
+		listData: { data: [], metadata: {} },
+		selectedId: "",
 		currency: "USD",
-		openSettings: false
+		shouldUpdateList: true
 	}
 };
