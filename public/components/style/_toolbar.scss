@@ -1,0 +1,75 @@
+.toolbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 3rem;
+    font-size: 3rem;
+    background-color: #5c8261;
+    z-index: 10;
+    &__items {
+        margin: 0;
+        padding: 0 .6rem;
+        & li {
+            position: relative;
+            display: block;
+        }
+        & .fa{
+            color: #ececec;
+			transition: transform .2s ease-out;
+			cursor: pointer;
+        }
+        &__home {
+            float: left;
+            left: 3rem;
+            & .fa-home {
+                font-size: 2.5rem;
+                top: -.35rem;
+                &:hover {
+                    transform: scale(1.15);
+                }
+            }
+			&:after {
+				clear: both;
+			}
+        }
+        &__currency {
+            float: right;
+            right: 1rem;
+            font-size: 1.5rem;
+            top: .8rem;
+            color: #ddd;
+            &:after {
+                clear: both;
+            }
+        }
+        &__settings {
+			float: right;
+			right: 2rem;
+			top: -.25rem;
+            & .fa-cog {
+                font-size: 1.8rem;
+                &:hover {
+                    transform: scale(1.15) rotate(40deg);
+                }
+            }
+			&:after {
+				clear: both;
+			}         
+        }
+        &__sync {
+            float: right;
+            right: 3rem;
+			top: -.25rem;
+            & .fa-retweet {
+                font-size: 1.8rem;
+                &:hover {
+					transform: scale(1.15);
+					color: lightgreen;
+                }
+            }
+			&:after {
+				clear: both;
+			}  
+        }
+    }
+}
