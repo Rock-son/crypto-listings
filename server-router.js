@@ -68,26 +68,27 @@ module.exports = function a(app) {
 			timeout: 2000,
 			validateStatus: status => status < 500 // Reject if the status code < 500
 		});
+		const BTCPromise = axios({
 			method: "get",
 			url: `https://api.coinmarketcap.com/v2/ticker/${req.body.id}/?structure=array
-				&convert=${currency.trim().toUpperCase()}`,
+				&convert=BTC`,
 			timeout: 2000,
 			validateStatus: status => status < 500 // Reject if the status code < 500
+		});
+
+		Promise.all([currencyPromise, BTCPromise]).then(response => {
+			return res.status(200).send({currency: response[0].data, btc: response[1].data});
 		})
-			.then(response => res.status(200).send(response.data))
-			.catch((error) => {
-				if (error.response) {
-					// The request was made and the server responded with a status code
-					// that falls out of the range of 2xx
-					return res.status(error.response.status)
-						.send(error.response.data, error.response.header);
-				}
-				if (error.request) {
-					// The request was made but no response was received `error.request`
-					// is an instance of http.ClientRequest in node.js
-					return res.status(400).send(error.request);
-				}
-				return res.status(400).send(error.message);
-			});
+		.catch(error => {
+			if (error.response) {
+				// The request was made and the server responded with a status code that falls out of the range of 2xx
+				return res.status(error.response.status).send(error.response.data);
+			}
+			if (error.request) {
+				// The request was made but no response was received `error.request` is an instance of http.ClientRequest in node.js
+				return res.status(400).send(error.request);
+			}
+			return res.status(400).send(error.message);
+		});		
 	});
-};
+}
