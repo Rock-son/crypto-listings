@@ -56,26 +56,9 @@ app.use(limiter);
 
 router(app);
 
-// PUT ALL ROUTES ABOVE THIS LINE OF CODE! - NOT IN USE
-if (process.env.NODE_ENV !== "production") {
-	const webpackDevMiddleware = require("webpack-dev-middleware");
-	const webpackHotMiddleware = require('webpack-hot-middleware');
-	const webpack = require("webpack");
-	const webpackConfig = require("./webpack.config.js");
-
-	const compiler = webpack(webpackConfig);
-
-	app.use(webpackDevMiddleware(compiler, {
-		publicPath: webpackConfig.output.path,
-		stats: { colors: true }
-	}));
-	app.use(webpackHotMiddleware(compiler, {
-		log: console.log
-	}));
-} else {
+// PUT ALL ROUTES ABOVE THIS LINE OF CODE!
 	// * NEEDED FOR REACT ROUTER HISTORY LIB
 	app.get("*", (req, res) => res.sendFile(path.join(__dirname, "dist", "index.html")));
-}
 
 
 // SERVER
