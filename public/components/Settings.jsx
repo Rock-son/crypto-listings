@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { whyDidYouUpdate } from "why-did-you-update";
 import { hot } from "react-hot-loader";
 
-import Toolbar from "Toolbar";
+import Toolbar from "./shared/Toolbar";
 
 if (process.env.NODE_ENV !== 'production') {
 	whyDidYouUpdate(React);
@@ -19,12 +19,13 @@ class Settings extends React.Component {
 	}
 
 	handleClick(e) {
-		this.props.changeSettings(e.target.value);
+		const { changeSettings } = this.props;
+		changeSettings(e.target.value);
 	}
 
+	/* eslint-disable react/jsx-one-expression-per-line */
 	render() {
-		const { cryptoData: { currency }  } = this.props;
-        
+		const { cryptoData: { currency } } = this.props;
 		return (
 			<div>
 				<Toolbar currency={currency} />
@@ -37,10 +38,29 @@ class Settings extends React.Component {
 		);
 	}
 }
-
+/* eslint-enable */
 Settings.propTypes = {
 	// REDUCERS
-	cryptoData: PropTypes.instanceOf(Object).isRequired
+	cryptoData: PropTypes.instanceOf(Object),
+	changeSettings: PropTypes.func
 };
 
+Settings.defaultProps = {
+	cryptoData: {
+		isFetchingData: false,
+		error: "",
+		listData: { data: [], metadata: {} },
+		detailsData: { currency: { data: [] }, btc: { data: [] } },
+		selectedId: "",
+		currency: "USD",
+		shouldUpdateList: true,
+		shouldUpdateDetails: true,
+		openSettings: false
+	},
+	changeSettings: () => ({
+		currency: "USD",
+		shouldUpdateList: true,
+		shouldUpdateDetails: true
+	})
+};
 export default hot(module)(Settings);

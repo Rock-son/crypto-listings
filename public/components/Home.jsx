@@ -6,10 +6,10 @@ import { whyDidYouUpdate } from "why-did-you-update";
 import { hot } from "react-hot-loader";
 import { Redirect } from "react-router";
 
-import Toolbar from "Toolbar";
-import List from "List";
-import { spreadAndFilterData } from "Helpers";
-import "../style/index";
+import Toolbar from "./shared/Toolbar";
+import List from "./shared/List";
+import { spreadAndFilterData } from "./shared/helpers";
+
 
 if (process.env.NODE_ENV !== 'production') {
 	whyDidYouUpdate(React);
@@ -26,7 +26,10 @@ class Home extends React.Component {
 
 	componentDidMount() {
 		const { fetchList, cryptoData: { currency, shouldUpdateList } } = this.props;
-		shouldUpdateList ? fetchList(currency, null) : (void 0);
+		if (shouldUpdateList) {
+			return fetchList(currency, null);
+		}
+		return null;
 	}
 
 	componentDidCatch(/* error, */ info) {
@@ -37,44 +40,47 @@ class Home extends React.Component {
 		e.preventDefault();
 		const { selectId } = this.props;
 		const id = e.target.id || e.target.parentNode.id;
-		
+
 		selectId(id);
-		this.setState({redirect: true});
+		this.setState({ redirect: true });
 	}
 
 	handleUpdate(e) {
 		if ((e.keyCode || 0) === 13 || e.type === "click") {
-			const { fetchList, prepareUpdate, cryptoData: { currency, selectedId } } = this.props;
+			const { fetchList, prepareUpdate, cryptoData: { currency } } = this.props;
 			prepareUpdate("shouldUpdateList");
-			fetchList(currency, null)
+			fetchList(currency, null);
 		}
 	}
 
 	/* eslint-disable react/jsx-indent-props */
-	render() {		
-        if (this.state.redirect) {
+	render() {
+		const { hasError, redirect, info } = this.state;
+		if (redirect) {
 			return <Redirect to="/details" />;
 		}
 		const { cryptoData, cryptoData: { listData, currency } } = this.props;
-		const { hasError } = this.state;
+
 		const desiredFields = ["id", "rank", "symbol", "price", "percent_change_24h"];
 		const filterData = (() => spreadAndFilterData(desiredFields, listData.data, currency))();
 
 		return (
 			<div>
-				<Toolbar currency={currency} handleUpdate={this.handleUpdate}/>
-				{this.state.hasError ?
-				(
-					<h2 className="home__error">{`An error occured (${this.state.info})! Please try again later.`}</h2>
-				):
-				(	
-					<List
-						handleClick={this.handleClick}
-						cryptoData={cryptoData}
-						filterData={filterData}
-						error={hasError}
-					/>
-				)}
+				<Toolbar currency={currency} handleUpdate={this.handleUpdate} />
+				{hasError
+					? (
+						<h2 className="home__error">
+							{`An error occured (${info})! Please try again later.`}
+						</h2>
+					)
+					: (
+						<List
+							handleClick={this.handleClick}
+							cryptoData={cryptoData}
+							filterData={filterData}
+							error={hasError}
+						/>
+					)}
 			</div>
 		);
 	}
@@ -82,13 +88,31 @@ class Home extends React.Component {
 /* eslint-enable */
 Home.propTypes = {
 	// REDUCERS
-	cryptoData: PropTypes.instanceOf(Object).isRequired,
+	cryptoData: PropTypes.instanceOf(Object),
 	// DISPATCH FUNCTIONS
-	fetchList: PropTypes.func
+	selectId: PropTypes.func,
+	fetchList: PropTypes.func,
+	prepareUpdate: PropTypes.func
 };
 
 Home.defaultProps = {
-	fetchList: () => [{ data: [], metadata: {} }]
+	cryptoData: {
+		isFetchingData: false,
+		error: "",
+		listData: { data: [], metadata: {} },
+		detailsData: { currency: { data: [] }, btc: { data: [] } },
+		selectedId: "",
+		currency: "USD",
+		shouldUpdateList: true,
+		shouldUpdateDetails: true,
+		openSettings: false
+	},
+	selectId: () => "",
+	fetchList: () => [{ data: [], metadata: {} }],
+	prepareUpdate: () => ({
+		shouldUpdateList: true,
+		shouldUpdateDetails: true
+	})
 };
 
 export default hot(module)(Home);
