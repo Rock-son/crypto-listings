@@ -16,6 +16,7 @@ import {
 } from "react-router-dom";
 // COMPONENTS
 import { Home, Details, Settings } from "MappedState";
+import "./components/style/index";
 
 // REDUCERS
 import rootReducer from "RootReducer";
