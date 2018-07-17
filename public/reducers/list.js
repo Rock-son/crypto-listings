@@ -9,7 +9,7 @@ import {
 import { INITIALIZE_LIST } from "State";
 
 /* eslint-disable import/prefer-default-export */
-const listReducer = (state = INITIALIZE_LIST, action) => {
+export const listReducer = (state = INITIALIZE_LIST, action) => {
 	switch (action.type) {
 	case FETCHING_DATA_START:
 		return {
@@ -63,8 +63,5 @@ const listReducer = (state = INITIALIZE_LIST, action) => {
 	default:
 		return state;
 	}
-}
-export default combineReducers({
-	cryptoData: listReducer
-});
+};
 /* eslint-enable */

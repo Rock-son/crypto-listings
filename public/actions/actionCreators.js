@@ -42,7 +42,7 @@ export function PREPARE_FOR_UPDATE(type) {
 	return {
 		type: PREPARE_UPDATE,
 		dataType: type
-	}
+	};
 }
 
 export function SELECT_ID(id) {
@@ -68,7 +68,8 @@ export function CHANGE_SETTINGS_FUNC(currency) {
 function shouldReturnResults(cryptoData, type) {
 	if (type === LIST && !cryptoData.shouldUpdateList) {
 		return false;
-	} else if (type === DETAILS && !cryptoData.shouldUpdateDetails) {
+	}
+	if (type === DETAILS && !cryptoData.shouldUpdateDetails) {
 		return false;
 	}
 
@@ -105,7 +106,6 @@ export function FETCH_DATA(currency, id = null) {
 					return dispatch(fetchFail(json.data.btc.metadata.error || "Error, try again!"));
 				}
 				return dispatch(fetchDetailsReceived(json.data, id));
-				
 			})
 			.catch(error => dispatch(fetchFail(error)));
 	};
