@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-class Details extends React.Component {
+export class Details extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { hasError: false, info: "" };
