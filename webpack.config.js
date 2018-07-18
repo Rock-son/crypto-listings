@@ -31,7 +31,7 @@ const config = {
 		filename:  __DEV__ ? "[name].js" : "[name]-[hash].js"
 	},
 	resolve: {
-		// using aliases makes components reusable! - with no relative paths, i.e. "require("Home")"
+		// for components reusability - but problem with tests that don't execute with webpack
 		alias: {
 			// HOME
 			Home: path.join(__dirname, "public/components/Home.jsx"),
@@ -39,7 +39,7 @@ const config = {
 			Details: path.join(__dirname, "public/components/Details.jsx"),
 			Toolbar: path.join(__dirname, "public/components/shared/Toolbar.jsx"),
 			Settings: path.join(__dirname, "public/components/Settings.jsx"),
-			MappedState: path.join(__dirname, "public/actions/mapProps.js"),
+			MappedState: path.join(__dirname, "public/components/_mapProps.js"),
 			Helpers: path.join(__dirname, "public/components/shared/helpers.js"),
 			// STATE
 			State: path.join(__dirname, "public/actions/state.js"),
