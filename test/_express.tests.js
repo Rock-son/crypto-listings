@@ -6,10 +6,10 @@ const currency = "EUR";
 
 describe('SERVER', function() {
     describe("POST /api/getCryptocurrencyList", function() {
-        it(`Should return a list with 100 objects, all with a property 'quotes[${currency}]'!`, function(done) {
+        it(`Should return a list with 100 objects, all with '${currency}' currency!`, function(done) {
         request(app)
-            .post("/api/getList")	// STUB
-			// .post("/api/getCryptocurrencyList")
+            // .post("/api/getList")	// STUB
+			.post("/api/getCryptocurrencyList")
             .send({currency})
             .expect(200)
             .expect((res) => {
@@ -28,8 +28,8 @@ describe('SERVER', function() {
 	describe("POST /api/getCryptocurrencyDetails", function() {
 		it("Should return an object with { name: Bitcoin } property", function(done) {
 		request(app)
-			.post("/api/getDetails")	// STUB
-			// .post("/api/getCryptocurrencyDetails")
+			// .post("/api/getDetails")	// STUB
+			.post("/api/getCryptocurrencyDetails")
             .send({currency, "id": "1"})
 			.expect(200)
 			.expect((res) => {
