@@ -31,22 +31,22 @@ const config = {
 		filename:  __DEV__ ? "[name].js" : "[name]-[hash].js"
 	},
 	resolve: {
-		// using aliases makes components reusable! - with no relative paths, i.e. "require("Home")"
+		// for components reusability - but problem with tests that don't execute with webpack
 		alias: {
 			// HOME
-			Home: path.join(__dirname, "public/components/home/Home.jsx"),
+			Home: path.join(__dirname, "public/components/Home.jsx"),
 			List: path.join(__dirname, "public/components/shared/List.jsx"),
-			Details: path.join(__dirname, "public/components/details/Details.jsx"),
+			Details: path.join(__dirname, "public/components/Details.jsx"),
 			Toolbar: path.join(__dirname, "public/components/shared/Toolbar.jsx"),
-			Settings: path.join(__dirname, "public/components/settings/Settings.jsx"),
-			MappedState: path.join(__dirname, "public/state/mapProps.js"),
+			Settings: path.join(__dirname, "public/components/Settings.jsx"),
+			MappedState: path.join(__dirname, "public/components/_mapProps.js"),
 			Helpers: path.join(__dirname, "public/components/shared/helpers.js"),
 			// STATE
-			State: path.join(__dirname, "public/state/state.js"),
-			Actions: path.join(__dirname, "public/state/actions.js"),
-			ActionCreators: path.join(__dirname, "public/state/actionCreators.js"),
-			Api: path.join(__dirname, "public/state/api.js"),
-			RootReducer: path.join(__dirname, "public/state/reducer.js")
+			State: path.join(__dirname, "public/actions/state.js"),
+			Actions: path.join(__dirname, "public/actions/actions.js"),
+			ActionCreators: path.join(__dirname, "public/actions/actionCreators.js"),
+			Api: path.join(__dirname, "public/actions/api.js"),
+			RootReducer: path.join(__dirname, "public/reducers/index.js")
 		},
 		extensions: [".js", ".jsx", ".scss"]
 	},
@@ -113,13 +113,13 @@ if (!__DEV__) {
 				mangle: true
 			}
 		}));
-	} else {
-		config.plugins.push(new FriendlyErrorsWebpackPlugin());
-		config.devServer = {
-			contentBase: [path.join(__dirname, "dist"), path.join(__dirname, "public")],
-			hot: true,
-			quiet: true
-		};
+} else {
+	config.plugins.push(new FriendlyErrorsWebpackPlugin());
+	config.devServer = {
+		contentBase: [path.join(__dirname, "dist"), path.join(__dirname, "public")],
+		hot: true,
+		quiet: true
+	};
 }
 
 module.exports = config;

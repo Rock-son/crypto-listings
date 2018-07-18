@@ -5,11 +5,11 @@ import { combineReducers } from "redux";
 import {
 	FETCHING_DATA_START, FETCHING_DATA_FAIL, FETCHING_LIST_SUCCESS, PREPARE_UPDATE,
 	FETCHING_DETAILS_SUCCESS, OPEN_SETTINGS, CHANGE_SETTINGS, SET_SELECTED_ID
-} from "Actions";
-import { INITIALIZE_LIST } from "State";
+} from "../actions/actions";
+import { INITIALIZE_LIST } from "../actions/state";
 
 /* eslint-disable import/prefer-default-export */
-const listReducer = (state = INITIALIZE_LIST, action) => {
+export const listReducer = (state = INITIALIZE_LIST, action) => {
 	switch (action.type) {
 	case FETCHING_DATA_START:
 		return {
@@ -46,7 +46,9 @@ const listReducer = (state = INITIALIZE_LIST, action) => {
 	case SET_SELECTED_ID:
 		return {
 			...state,
-			selectedId: action.id
+			selectedId: action.id,
+			shouldUpdateDetails: true
+
 		};
 	case OPEN_SETTINGS:
 		return {
@@ -63,8 +65,5 @@ const listReducer = (state = INITIALIZE_LIST, action) => {
 	default:
 		return state;
 	}
-}
-export default combineReducers({
-	cryptoData: listReducer
-});
+};
 /* eslint-enable */

@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 // app.use(morgan({stream: accessLogStream}));
 
 // SECURITY
-helmet(app);
+// helmet(app);
 
 // LIMITER
 app.use(limiter);
@@ -59,11 +59,15 @@ app.use(limiter);
 
 router(app);
 
-// PUT ALL ROUTES ABOVE THIS LINE OF CODE!
-// * NEEDED FOR REACT ROUTER HISTORY LIB
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "dist", "index.html")));
 
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "dist", "index.html")));
+
+process.on('unhandledRejection', (err) => {
+	console.log("Error", err);
+});
 
 // SERVER
 http.createServer(app)
 	.listen(port, () => console.log(`Listening on port: ${port}`));
+
+module.exports.app = app;
