@@ -3,8 +3,8 @@
 import {
 	FETCHING_DATA_START, FETCHING_DATA_FAIL, FETCHING_LIST_SUCCESS, PREPARE_UPDATE,
 	FETCHING_DETAILS_SUCCESS, OPEN_SETTINGS, CHANGE_SETTINGS, SET_SELECTED_ID
-} from "Actions";
-import { fetchList, fetchDetails } from "Api";
+} from "./actions";
+import { fetchList, fetchDetails } from "./api";
 
 const LIST = "list";
 const DETAILS = "details";

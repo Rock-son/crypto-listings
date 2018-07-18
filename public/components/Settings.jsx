@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-class Settings extends React.Component {
+export class Settings extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);

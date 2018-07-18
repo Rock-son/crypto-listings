@@ -32,6 +32,36 @@ module.exports.details = {
                 timestamp: 1531740764,
                 error: null
             }
+        },
+        btc: 
+        {
+            data: [
+                {
+                    id: 1,
+                    name: "Bitcoin",
+                    symbol: "BTC",
+                    website_slug: "bitcoin",
+                    rank: 1,
+                    circulating_supply: 17151800,
+                    total_supply: 17151800,
+                    max_supply: 21000000,
+                    quotes: {
+                        BTC: {
+                            price: 1,
+                            volume_24h: 4694050000,
+                            market_cap: 113408044636,
+                            percent_change_1h: 1.22,
+                            percent_change_24h: 4.07,
+                            percent_change_7d: -2.55
+                        }
+                    },
+                    last_updated: 1531741116
+                    }
+            ],
+            metadata: {
+                timestamp: 1531740764,
+                error: null
+            }
         }
     },
     EUR:
@@ -65,6 +95,36 @@ module.exports.details = {
                 timestamp: 1531740764,
                 error: null
             }
+        },
+        btc: 
+        {
+            data: [
+                {
+                    id: 1,
+                    name: "Bitcoin",
+                    symbol: "BTC",
+                    website_slug: "bitcoin",
+                    rank: 1,
+                    circulating_supply: 17151800,
+                    total_supply: 17151800,
+                    max_supply: 21000000,
+                    quotes: {
+                        BTC: {
+                            price: 1,
+                            volume_24h: 4694050000,
+                            market_cap: 113408044636,
+                            percent_change_1h: 1.22,
+                            percent_change_24h: 4.07,
+                            percent_change_7d: -2.55
+                        }
+                    },
+                    last_updated: 1531741116
+                    }
+            ],
+            metadata: {
+                timestamp: 1531740764,
+                error: null
+            }
         }
     },
     CNY:
@@ -84,6 +144,36 @@ module.exports.details = {
                     quotes: {
                         CNY: {
                             price: 6612.02,
+                            volume_24h: 4694050000,
+                            market_cap: 113408044636,
+                            percent_change_1h: 1.22,
+                            percent_change_24h: 4.07,
+                            percent_change_7d: -2.55
+                        }
+                    },
+                    last_updated: 1531741116
+                    }
+            ],
+            metadata: {
+                timestamp: 1531740764,
+                error: null
+            }
+        },
+        btc: 
+        {
+            data: [
+                {
+                    id: 1,
+                    name: "Bitcoin",
+                    symbol: "BTC",
+                    website_slug: "bitcoin",
+                    rank: 1,
+                    circulating_supply: 17151800,
+                    total_supply: 17151800,
+                    max_supply: 21000000,
+                    quotes: {
+                        BTC: {
+                            price: 1,
                             volume_24h: 4694050000,
                             market_cap: 113408044636,
                             percent_change_1h: 1.22,

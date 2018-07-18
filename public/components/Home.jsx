@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-class Home extends React.Component {
+export class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { hasError: false, info: "", redirect: false };
