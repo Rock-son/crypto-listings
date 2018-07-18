@@ -1,12 +1,13 @@
 "use strict";
 
-import Home from "Home";
-import Details from "Details";
-import Settings from "Settings";
 import { connect } from "react-redux";
+
+import Home from "./Home";
+import Details from "./Details";
+import Settings from "./Settings";
 import {
 	FETCH_DATA, PREPARE_FOR_UPDATE, SELECT_ID, OPEN_SETTINGS_FUNC, CHANGE_SETTINGS_FUNC
-} from "ActionCreators";
+} from "../actions/actionCreators";
 
 // Redux connect to props and dispatch actions
 const mapStateToProps = function a(state) {
