@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { whyDidYouUpdate } from "why-did-you-update";
 import { hot } from "react-hot-loader";
-import { Redirect } from "react-router";
+import { withRouter } from 'react-router-dom';
 
 import Toolbar from "./shared/Toolbar";
 import List from "./shared/List";
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 export class Home extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { hasError: false, info: "", redirect: false };
+		this.state = { hasError: false, info: "" };
 		this.handleClick = this.handleClick.bind(this);
 		this.handleUpdate = this.handleUpdate.bind(this);
 	}
@@ -38,11 +38,11 @@ export class Home extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		const { selectId } = this.props;
+		const { selectId, history } = this.props;
 		const id = e.target.id || e.target.parentNode.id;
 
 		selectId(id);
-		this.setState({ redirect: true });
+		return history.push("/details");
 	}
 
 	handleUpdate(e) {
@@ -55,10 +55,7 @@ export class Home extends React.Component {
 
 	/* eslint-disable react/jsx-indent-props */
 	render() {
-		const { hasError, redirect, info } = this.state;
-		if (redirect) {
-			return <Redirect to="/details" />;
-		}
+		const { hasError, info } = this.state;
 		const { cryptoData, cryptoData: { listData, currency } } = this.props;
 
 		const desiredFields = ["id", "rank", "symbol", "price", "percent_change_24h"];
@@ -92,7 +89,9 @@ Home.propTypes = {
 	// DISPATCH FUNCTIONS
 	selectId: PropTypes.func,
 	fetchList: PropTypes.func,
-	prepareUpdate: PropTypes.func
+	prepareUpdate: PropTypes.func,
+	// REACT-ROUTER
+	history: PropTypes.instanceOf(Object).isRequired,
 };
 
 Home.defaultProps = {
@@ -115,4 +114,4 @@ Home.defaultProps = {
 	})
 };
 
-export default hot(module)(Home);
+export default hot(module)(withRouter(Home));

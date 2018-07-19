@@ -1,9 +1,5 @@
 "use strict";
 
-// if development
-if (process.env.HEROKU_RUN == null) {
-	require("dotenv").config();
-}
 
 const express = require("express");
 const http = require("http");
@@ -48,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 // app.use(morgan({stream: accessLogStream}));
 
 // SECURITY
-// helmet(app);
+helmet(app);
 
 // LIMITER
 app.use(limiter);
