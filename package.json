@@ -8,8 +8,8 @@
     "clean": "rimraf dist",
     "test": "cross-env NODE_ENV=production jest",
     "test-w": "nodemon --exec \"npm test\"",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack && cross-env NODE_ENV=production node server.js",
-    "builddev": "npm run clean && cross-env NODE_ENV=development webpack && cross-env NODE_ENV=development node server.js",
+    "bld_prod": "npm run clean && cross-env NODE_ENV=production webpack && cross-env NODE_ENV=production node server.js",
+    "bld_dev": "npm run clean && cross-env NODE_ENV=development webpack && cross-env NODE_ENV=development node server.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot"
   },
   "eslintIgnore": [
