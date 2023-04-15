@@ -20,8 +20,8 @@ Testing: `npm run test` - test folders listed in *[package.json](./package.json)
 ```
 { "jest":
         "testMatch":  {
-                    ...paths
-     }
+                ...paths
+        }
 } 
 
 ```
