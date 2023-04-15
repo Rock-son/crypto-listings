@@ -1,6 +1,10 @@
 {
   "name": "reactjs_test_assignment_povio",
   "version": "1.2.2",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.14.0"
+  },
   "description": "ReactJS Test Assignment - Povio",
   "main": "server.js",
   "scripts": {
@@ -51,7 +55,7 @@
     "jsdom": "11.11.0",
     "jsdom-global": "3.0.2",
     "mocha": "^5.2.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.14.0",
     "normalize.css": "^8.0.0",
     "postcss": "^6.0.23",
     "postcss-loader": "^2.1.6",
